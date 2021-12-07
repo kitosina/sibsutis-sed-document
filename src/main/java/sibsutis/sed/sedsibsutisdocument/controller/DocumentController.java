@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import sibsutis.sed.sedsibsutisdocument.model.dto.SendDocumentEncrypt;
 import sibsutis.sed.sedsibsutisdocument.service.DocumentService;
+import sibsutis.sed.sedsibsutisdocument.service.SignService;
 
 @RestController
 @RequestMapping("/document")
@@ -30,4 +31,12 @@ public class DocumentController {
                                            @RequestParam("email_receiver") String emailReceiver) {
         return ResponseEntity.ok(documentService.getIncomingDocument(documentName, emailReceiver));
     }
+
+    @GetMapping("/sign")
+    public ResponseEntity signDocumentUser(@RequestParam("document_name") String documentName,
+                                           @RequestParam("email_receiver") String emailReceiver,
+                                           @RequestParam("sign_flag") boolean signFlag) {
+        return ResponseEntity.ok(documentService.getSignDocument(documentName, emailReceiver, signFlag));
+    }
+
 }
